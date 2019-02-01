@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 
 namespace EFCoreTutorials
 {
@@ -10,11 +12,14 @@ namespace EFCoreTutorials
             {
                 var std = new Student()
                 {
-                    Name = "Arley"
+                    FirstName = "Arley"
                 };
 
                 context.Students.Add(std);
                 context.SaveChanges();
+
+                var studentWithGrade = context.Students.Where(s => s.FirstName == "Arley").ToList();
+                Console.WriteLine(studentWithGrade.FirstOrDefault().FirstName);
             }
         }
     }
