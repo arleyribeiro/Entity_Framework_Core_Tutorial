@@ -31,38 +31,28 @@ namespace EFCoreTutorials.Migrations
 
             modelBuilder.Entity("EFCoreTutorials.Grade", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("GradeId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("GradeName");
 
                     b.Property<string>("Section");
 
-                    b.HasKey("Id");
+                    b.HasKey("GradeId");
 
                     b.ToTable("Grade");
                 });
 
             modelBuilder.Entity("EFCoreTutorials.Student", b =>
                 {
-                    b.Property<int>("StudentId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("DateOfBirth");
+                    b.Property<int?>("GradeId");
 
-                    b.Property<string>("FirstName");
+                    b.Property<string>("Name");
 
-                    b.Property<int>("GradeId");
-
-                    b.Property<decimal>("Height");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<byte[]>("Photo");
-
-                    b.Property<float>("Weight");
-
-                    b.HasKey("StudentId");
+                    b.HasKey("Id");
 
                     b.HasIndex("GradeId");
 
@@ -72,9 +62,8 @@ namespace EFCoreTutorials.Migrations
             modelBuilder.Entity("EFCoreTutorials.Student", b =>
                 {
                     b.HasOne("EFCoreTutorials.Grade", "Grade")
-                        .WithMany("Students")
-                        .HasForeignKey("GradeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany()
+                        .HasForeignKey("GradeId");
                 });
 #pragma warning restore 612, 618
         }

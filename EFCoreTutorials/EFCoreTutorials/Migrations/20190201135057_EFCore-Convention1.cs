@@ -1,10 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EFCoreTutorials.Migrations
 {
-    public partial class NewEntityGrade : Migration
+    public partial class EFCoreConvention1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,39 +24,34 @@ namespace EFCoreTutorials.Migrations
                 name: "Grade",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    GradeId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     GradeName = table.Column<string>(nullable: true),
                     Section = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Grade", x => x.Id);
+                    table.PrimaryKey("PK_Grade", x => x.GradeId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Students",
                 columns: table => new
                 {
-                    StudentId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    DateOfBirth = table.Column<DateTime>(nullable: false),
-                    Photo = table.Column<byte[]>(nullable: true),
-                    Height = table.Column<decimal>(nullable: false),
-                    Weight = table.Column<float>(nullable: false),
-                    GradeId = table.Column<int>(nullable: false)
+                    Name = table.Column<string>(nullable: true),
+                    GradeId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Students", x => x.StudentId);
+                    table.PrimaryKey("PK_Students", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Students_Grade_GradeId",
                         column: x => x.GradeId,
                         principalTable: "Grade",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "GradeId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

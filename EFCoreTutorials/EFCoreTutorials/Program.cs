@@ -12,14 +12,14 @@ namespace EFCoreTutorials
             {
                 var std = new Student()
                 {
-                    FirstName = "Arley"
+                    Name = "Arley"
                 };
 
                 context.Students.Add(std);
                 context.SaveChanges();
 
-                var studentWithGrade = context.Students.Where(s => s.FirstName == "Arley").ToList();
-                Console.WriteLine(studentWithGrade.FirstOrDefault().FirstName);
+                var studentWithGrade = context.Students.Where(s => s.Name == "Arley").ToList();
+                Console.WriteLine(studentWithGrade.FirstOrDefault().Name);
             }
         }
     }
